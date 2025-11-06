@@ -19,18 +19,47 @@ const Index = () => {
     }
   }, []);
 
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Locksmith",
+    "name": "Dallas Home & Commercial Locksmith",
+    "telephone": "+14692509836",
+    "email": "info@dallashomecommerciallock.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "13350 Dallas Pkwy",
+      "addressLocality": "Dallas",
+      "addressRegion": "TX",
+      "postalCode": "75240",
+      "addressCountry": "US"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Dallas"
+    },
+    "openingHours": "Mo,Tu,We,Th,Fr,Sa,Su 00:00-23:59",
+    "priceRange": "$$",
+    "url": window.location.origin
+  };
+
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
-      <main className="flex-grow">
+    <>
+      <script type="application/ld+json">
+        {JSON.stringify(organizationSchema)}
+      </script>
+      
+      <div className="min-h-screen flex flex-col">
+        <Header />
+        <main className="flex-grow">
         <HeroSection />
         <ServicesGrid />
         <TestimonialsSection />
         <FAQSection />
-        <ConversionSection />
-      </main>
-      <MinimalFooter />
-    </div>
+          <ConversionSection />
+        </main>
+        <MinimalFooter />
+      </div>
+    </>
   );
 };
 

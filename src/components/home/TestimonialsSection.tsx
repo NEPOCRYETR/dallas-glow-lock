@@ -1,4 +1,5 @@
 import { Star } from "lucide-react";
+import useEmblaCarousel from "embla-carousel-react";
 
 const testimonials = [
   {
@@ -25,6 +26,14 @@ const testimonials = [
 ];
 
 const TestimonialsSection = () => {
+  const [emblaRef] = useEmblaCarousel({ 
+    loop: true,
+    align: "start",
+    breakpoints: {
+      '(min-width: 768px)': { active: false }
+    }
+  });
+
   return (
     <section className="py-16 md:py-24 bg-secondary/30">
       <div className="container mx-auto px-4">
@@ -37,11 +46,12 @@ const TestimonialsSection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <div className="overflow-hidden md:overflow-visible" ref={emblaRef}>
+          <div className="flex md:grid md:grid-cols-3 gap-6 max-w-6xl mx-auto touch-pan-y">
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="bg-card rounded-2xl p-6 shadow-soft hover:shadow-medium transition-shadow"
+              className="flex-[0_0_85%] md:flex-[0_0_auto] mr-6 md:mr-0 bg-card rounded-2xl p-6 shadow-soft hover:shadow-medium transition-shadow"
             >
               <div className="flex items-center gap-1 mb-4">
                 {[...Array(testimonial.rating)].map((_, i) => (
@@ -64,6 +74,7 @@ const TestimonialsSection = () => {
               </div>
             </div>
           ))}
+          </div>
         </div>
       </div>
     </section>
